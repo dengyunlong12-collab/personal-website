@@ -1,11 +1,8 @@
-import { type ReactNode } from 'react'
-
 interface Props {
   isAdmin: boolean
-  children: ReactNode
 }
 
-export default function Header({ isAdmin, children }: Props) {
+export default function Header({ isAdmin }: Props) {
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/60">
       <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
