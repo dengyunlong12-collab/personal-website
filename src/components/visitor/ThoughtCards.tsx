@@ -9,7 +9,7 @@ export default function ThoughtCards({ records }: Props) {
     return (
       <div className="text-center py-20">
         <div className="text-5xl mb-4">💭</div>
-        <p className="text-gray-400 text-sm">No thoughts shared yet.</p>
+        <p className="text-gray-400 text-sm">还没有分享任何想法，记录下你的思考吧！</p>
       </div>
     )
   }
@@ -30,7 +30,7 @@ export default function ThoughtCards({ records }: Props) {
               <div>
                 <p className="text-xs font-medium text-gray-900">Elon</p>
                 <p className="text-xs text-gray-400">
-                  {new Date(record.date).toLocaleDateString('en-US', {
+                  {new Date(record.date).toLocaleDateString('zh-CN', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',

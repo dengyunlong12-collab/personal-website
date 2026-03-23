@@ -1,20 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Elon's Space</title>
+    <title>壹龙的空间</title>
   </head>
   <body>
     <div id="root">
       <div id="loading-fallback" style="display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:#666">
-        Loading...
+        加载中...
       </div>
     </div>
     <noscript>
       <div style="text-align:center;padding:60px;font-family:sans-serif">
-        <h2>Please enable JavaScript to use this app.</h2>
+        <h2>请启用 JavaScript 以使用此应用</h2>
       </div>
     </noscript>
     <script>
@@ -22,7 +22,7 @@
       window.onerror = function(msg, url, line, col, error) {
         var el = document.getElementById('root');
         if (el) {
-          el.innerHTML = '<div style="padding:40px;font-family:monospace;color:#c00"><h2>App Error</h2><pre>' +
+          el.innerHTML = '<div style="padding:40px;font-family:monospace;color:#c00"><h2>应用错误</h2><pre>' +
             msg + '\n' + url + ':' + line + ':' + col +
             (error && error.stack ? '\n\n' + error.stack : '') + '</pre></div>';
         }
@@ -30,8 +30,8 @@
       window.addEventListener('unhandledrejection', function(e) {
         var el = document.getElementById('root');
         if (el) {
-          el.innerHTML = '<div style="padding:40px;font-family:monospace;color:#c00"><h2>Promise Error</h2><pre>' +
-            (e.reason ? (e.reason.message || e.reason) : 'Unknown') +
+          el.innerHTML = '<div style="padding:40px;font-family:monospace;color:#c00"><h2>Promise 错误</h2><pre>' +
+            (e.reason ? (e.reason.message || e.reason) : '未知') +
             (e.reason && e.reason.stack ? '\n\n' + e.reason.stack : '') + '</pre></div>';
         }
       });

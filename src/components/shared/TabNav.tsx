@@ -6,9 +6,9 @@ interface Props {
 }
 
 const tabs: { key: RecordType; label: string; icon: string }[] = [
-  { key: 'fitness', label: 'Fitness', icon: '💪' },
-  { key: 'dance', label: 'Dance', icon: '💃' },
-  { key: 'thoughts', label: 'Thoughts', icon: '💭' },
+  { key: 'fitness', label: '健身', icon: '💪' },
+  { key: 'dance', label: '跳舞', icon: '💃' },
+  { key: 'thoughts', label: '随想', icon: '💭' },
 ]
 
 export default function TabNav({ activeTab, onTabChange }: Props) {

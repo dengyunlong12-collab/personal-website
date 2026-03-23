@@ -32,11 +32,11 @@ export default function ThoughtForm({ onSubmit, initialData, onCancel }: Props) 
   return (
     <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-gray-200/60 p-6 mb-8 animate-fade-in">
       <h3 className="text-lg font-semibold text-gray-900 mb-5">
-        {initialData ? 'Edit Thought' : 'New Daily Thought'}
+        {initialData ? '编辑随想' : '新增每日随想'}
       </h3>
       <div className="space-y-4 mb-4">
         <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wide">Date</label>
+          <label className="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wide">日期</label>
           <input
             type="date"
             value={date}
@@ -46,11 +46,11 @@ export default function ThoughtForm({ onSubmit, initialData, onCancel }: Props) 
           />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wide">What's on your mind?</label>
+          <label className="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wide">今天的想法？</label>
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            placeholder="Write your thoughts here..."
+            placeholder="在这里写下你的想法..."
             rows={4}
             className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-300 transition-all placeholder:text-gray-400 resize-none"
             required
@@ -64,7 +64,7 @@ export default function ThoughtForm({ onSubmit, initialData, onCancel }: Props) 
             onClick={onCancel}
             className="px-5 py-2.5 text-sm font-medium text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
           >
-            Cancel
+            取消
           </button>
         )}
         <button
@@ -72,7 +72,7 @@ export default function ThoughtForm({ onSubmit, initialData, onCancel }: Props) 
           disabled={loading}
           className="px-6 py-2.5 text-sm font-medium text-white bg-gray-900 rounded-full hover:bg-gray-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {loading ? 'Saving...' : initialData ? 'Update' : 'Add Thought'}
+          {loading ? '保存中...' : initialData ? '更新' : '添加随想'}
         </button>
       </div>
     </form>

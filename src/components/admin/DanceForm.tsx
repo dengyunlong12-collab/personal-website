@@ -38,11 +38,11 @@ export default function DanceForm({ onSubmit, initialData, onCancel }: Props) {
   return (
     <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-gray-200/60 p-6 mb-8 animate-fade-in">
       <h3 className="text-lg font-semibold text-gray-900 mb-5">
-        {initialData ? 'Edit Dance Record' : 'New Dance Record'}
+        {initialData ? '编辑跳舞记录' : '新增跳舞记录'}
       </h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wide">Date</label>
+          <label className="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wide">日期</label>
           <input
             type="date"
             value={date}
@@ -52,18 +52,18 @@ export default function DanceForm({ onSubmit, initialData, onCancel }: Props) {
           />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wide">Dance Style</label>
+          <label className="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wide">舞蹈类型</label>
           <input
             type="text"
             value={danceStyle}
             onChange={(e) => setDanceStyle(e.target.value)}
-            placeholder="e.g. Hip-hop, Jazz, Ballet"
+            placeholder="例如：街舞、爵士、芭蕾"
             className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-300 transition-all placeholder:text-gray-400"
             required
           />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wide">Duration (min)</label>
+          <label className="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wide">时长（分钟）</label>
           <input
             type="number"
             value={duration}
@@ -75,12 +75,12 @@ export default function DanceForm({ onSubmit, initialData, onCancel }: Props) {
           />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wide">Notes</label>
+          <label className="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wide">备注</label>
           <input
             type="text"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            placeholder="Optional notes..."
+            placeholder="可选备注..."
             className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-300 transition-all placeholder:text-gray-400"
           />
         </div>
@@ -92,7 +92,7 @@ export default function DanceForm({ onSubmit, initialData, onCancel }: Props) {
             onClick={onCancel}
             className="px-5 py-2.5 text-sm font-medium text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
           >
-            Cancel
+            取消
           </button>
         )}
         <button
@@ -100,7 +100,7 @@ export default function DanceForm({ onSubmit, initialData, onCancel }: Props) {
           disabled={loading}
           className="px-6 py-2.5 text-sm font-medium text-white bg-gray-900 rounded-full hover:bg-gray-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {loading ? 'Saving...' : initialData ? 'Update' : 'Add Record'}
+          {loading ? '保存中...' : initialData ? '更新' : '添加记录'}
         </button>
       </div>
     </form>

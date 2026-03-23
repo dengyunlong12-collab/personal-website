@@ -55,7 +55,7 @@ export default function AdminPage() {
       setThoughts(dailyThoughts)
     } catch (err) {
       console.error('Failed to load data:', err)
-      showToast('Failed to load data. Check your Supabase config.', 'error')
+      showToast('加载数据失败，请检查 Supabase 配置', 'error')
     } finally {
       setLoading(false)
     }
@@ -69,10 +69,10 @@ export default function AdminPage() {
   const handleCreateFitness = async (record: Omit<FitnessRecord, 'id' | 'created_at'>) => {
     try {
       await api.createFitnessRecord(record)
-      showToast('Fitness record added!', 'success')
+      showToast('健身记录已添加！', 'success')
       loadData()
     } catch {
-      showToast('Failed to add record.', 'error')
+      showToast('添加记录失败', 'error')
     }
   }
 
@@ -81,10 +81,10 @@ export default function AdminPage() {
     try {
       await api.updateFitnessRecord(editingFitness.id, record)
       setEditingFitness(null)
-      showToast('Record updated!', 'success')
+      showToast('记录已更新！', 'success')
       loadData()
     } catch {
-      showToast('Failed to update record.', 'error')
+      showToast('更新记录失败', 'error')
     }
   }
 
@@ -92,10 +92,10 @@ export default function AdminPage() {
   const handleCreateDance = async (record: Omit<DanceRecord, 'id' | 'created_at'>) => {
     try {
       await api.createDanceRecord(record)
-      showToast('Dance record added!', 'success')
+      showToast('跳舞记录已添加！', 'success')
       loadData()
     } catch {
-      showToast('Failed to add record.', 'error')
+      showToast('添加记录失败', 'error')
     }
   }
 
@@ -104,10 +104,10 @@ export default function AdminPage() {
     try {
       await api.updateDanceRecord(editingDance.id, record)
       setEditingDance(null)
-      showToast('Record updated!', 'success')
+      showToast('记录已更新！', 'success')
       loadData()
     } catch {
-      showToast('Failed to update record.', 'error')
+      showToast('更新记录失败', 'error')
     }
   }
 
@@ -115,10 +115,10 @@ export default function AdminPage() {
   const handleCreateThought = async (record: Omit<DailyThought, 'id' | 'created_at'>) => {
     try {
       await api.createDailyThought(record)
-      showToast('Thought saved!', 'success')
+      showToast('随想已保存！', 'success')
       loadData()
     } catch {
-      showToast('Failed to save thought.', 'error')
+      showToast('保存随想失败', 'error')
     }
   }
 
@@ -127,10 +127,10 @@ export default function AdminPage() {
     try {
       await api.updateDailyThought(editingThought.id, record)
       setEditingThought(null)
-      showToast('Thought updated!', 'success')
+      showToast('随想已更新！', 'success')
       loadData()
     } catch {
-      showToast('Failed to update thought.', 'error')
+      showToast('更新随想失败', 'error')
     }
   }
 
@@ -141,10 +141,10 @@ export default function AdminPage() {
       if (type === 'fitness') await api.deleteFitnessRecord(id)
       else if (type === 'dance') await api.deleteDanceRecord(id)
       else await api.deleteDailyThought(id)
-      showToast('Deleted successfully.', 'success')
+      showToast('删除成功', 'success')
       loadData()
     } catch {
-      showToast('Failed to delete.', 'error')
+      showToast('删除失败', 'error')
     }
     setConfirmDialog({ show: false, id: '', type: 'fitness' })
   }
@@ -153,7 +153,7 @@ export default function AdminPage() {
     return (
       <div className="flex flex-col items-center justify-center py-32 gap-4">
         <div className="w-8 h-8 border-2 border-gray-200 border-t-gray-900 rounded-full animate-spin" />
-        <p className="text-gray-500 text-sm">Loading data...</p>
+        <p className="text-gray-500 text-sm">加载中...</p>
       </div>
     )
   }
@@ -163,8 +163,8 @@ export default function AdminPage() {
       <Toast {...toast} />
       <ConfirmDialog
         show={confirmDialog.show}
-        title="Delete Record"
-        message="Are you sure you want to delete this record? This action cannot be undone."
+        title="删除记录"
+        message="确定要删除这条记录吗？此操作无法撤销。"
         onConfirm={handleDelete}
         onCancel={() => setConfirmDialog({ show: false, id: '', type: 'fitness' })}
       />
@@ -172,10 +172,10 @@ export default function AdminPage() {
       {/* Hero section */}
       <div className="text-center pt-16 pb-12 animate-fade-in-up">
         <h1 className="text-5xl font-bold tracking-tight text-gray-900 mb-4">
-          Dashboard
+          管理后台
         </h1>
         <p className="text-lg text-gray-500 max-w-md mx-auto leading-relaxed">
-          Manage your fitness, dance records, and daily thoughts.
+          管理你的健身、舞蹈记录和日常随想
         </p>
       </div>
 
