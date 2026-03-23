@@ -188,3 +188,4 @@ src/
   main.tsx          # Entry point
   index.css         # Tailwind imports and custom animations
 ```
+# Trigger redeploy
