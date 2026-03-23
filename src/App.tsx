@@ -8,9 +8,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#fbfbfd]">
-      <Header isAdmin={isAdmin}>
-        {null}
-      </Header>
+      <Header isAdmin={isAdmin} />
       <main>
         {isAdmin ? <AdminPage /> : <VisitorPage />}
       </main>
