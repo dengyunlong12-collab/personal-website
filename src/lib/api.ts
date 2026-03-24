@@ -1,5 +1,5 @@
 import { supabase } from './supabase'
-import type { FitnessRecord, DanceRecord, DailyThought } from '../types'
+import type { FitnessRecord, DanceRecord, DailyThought, LifePost } from '../types'
 
 // ==================== Fitness Records ====================
 
@@ -110,4 +110,61 @@ export async function updateDailyThought(id: string, record: Partial<DailyThough
 export async function deleteDailyThought(id: string) {
   const { error } = await supabase.from('daily_thoughts').delete().eq('id', id)
   if (error) throw error
+}
+
+// ==================== Life Posts ====================
+
+export async function getLifePosts(): Promise<LifePost[]> {
+  const { data, error } = await supabase
+    .from('life_posts')
+    .select('*')
+    .order('date', { ascending: false })
+  if (error) throw error
+  return data || []
+}
+
+export async function createLifePost(record: Omit<LifePost, 'id' | 'created_at'>) {
+  const { data, error } = await supabase
+    .from('life_posts')
+    .insert(record)
+    .select()
+    .single()
+  if (error) throw error
+  return data
+}
+
+export async function updateLifePost(id: string, record: Partial<LifePost>) {
+  const { data, error } = await supabase
+    .from('life_posts')
+    .update(record)
+    .eq('id', id)
+    .select()
+    .single()
+  if (error) throw error
+  return data
+}
+
+export async function deleteLifePost(id: string) {
+  const { error } = await supabase.from('life_posts').delete().eq('id', id)
+  if (error) throw error
+}
+
+// ==================== Image Upload ====================
+
+export async function uploadImage(file: File): Promise<string> {
+  const fileExt = file.name.split('.').pop()
+  const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`
+  const filePath = `uploads/${fileName}`
+
+  const { error } = await supabase.storage
+    .from('images')
+    .upload(filePath, file)
+
+  if (error) throw error
+
+  const { data } = supabase.storage
+    .from('images')
+    .getPublicUrl(filePath)
+
+  return data.publicUrl
 }

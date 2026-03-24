@@ -29,9 +29,10 @@ export default function ThoughtList({ records, onEdit, onDelete }: Props) {
                 <span className="text-2xl">💭</span>
                 <p className="text-xs text-gray-400">{record.date}</p>
               </div>
-              <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap pl-11">
-                {record.content}
-              </p>
+              <div
+                className="text-sm text-gray-700 leading-relaxed pl-11 [&_img]:hidden [&_h2]:inline [&_h3]:inline [&_p]:inline line-clamp-3"
+                dangerouslySetInnerHTML={{ __html: record.content }}
+              />
             </div>
             <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
               <button

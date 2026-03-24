@@ -5,10 +5,11 @@ interface Props {
   onTabChange: (tab: RecordType) => void
 }
 
-const tabs: { key: RecordType; label: string; icon: string }[] = [
-  { key: 'fitness', label: '健身', icon: '💪' },
-  { key: 'dance', label: '跳舞', icon: '💃' },
-  { key: 'thoughts', label: '随想', icon: '💭' },
+const tabs: { key: RecordType; label: string }[] = [
+  { key: 'about', label: '关于我' },
+  { key: 'life', label: '我的生活' },
+  { key: 'thoughts', label: '我的想法' },
+  { key: 'projects', label: '我的项目' },
 ]
 
 export default function TabNav({ activeTab, onTabChange }: Props) {
@@ -28,9 +29,8 @@ export default function TabNav({ activeTab, onTabChange }: Props) {
               }
             `}
           >
-            <span className="relative z-10 flex items-center gap-2">
-              <span>{tab.icon}</span>
-              <span>{tab.label}</span>
+            <span className="relative z-10">
+              {tab.label}
             </span>
           </button>
         ))}

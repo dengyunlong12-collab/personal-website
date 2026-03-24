@@ -14,6 +14,9 @@ export default function ThoughtCards({ records }: Props) {
     )
   }
 
+  // Check if content looks like HTML
+  const isHtml = (str: string) => /<[a-z][\s\S]*>/i.test(str)
+
   return (
     <div className="space-y-6">
       {records.map((record, index) => (
@@ -28,7 +31,7 @@ export default function ThoughtCards({ records }: Props) {
                 <span className="text-sm">✨</span>
               </div>
               <div>
-                <p className="text-xs font-medium text-gray-900">Elon</p>
+                <p className="text-xs font-medium text-gray-900">壹龙</p>
                 <p className="text-xs text-gray-400">
                   {new Date(record.date).toLocaleDateString('zh-CN', {
                     year: 'numeric',
@@ -38,9 +41,26 @@ export default function ThoughtCards({ records }: Props) {
                 </p>
               </div>
             </div>
-            <p className="text-base text-gray-700 leading-relaxed whitespace-pre-wrap">
-              {record.content}
-            </p>
+            {isHtml(record.content) ? (
+              <div
+                className="prose prose-sm max-w-none text-gray-700 leading-relaxed
+                  [&_img]:rounded-xl [&_img]:max-w-full [&_img]:h-auto [&_img]:my-4
+                  [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-gray-900 [&_h2]:mt-6 [&_h2]:mb-3
+                  [&_h3]:text-base [&_h3]:font-semibold [&_h3]:text-gray-900 [&_h3]:mt-4 [&_h3]:mb-2
+                  [&_p]:mb-3 [&_p]:leading-relaxed
+                  [&_blockquote]:border-l-4 [&_blockquote]:border-gray-200 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-gray-500
+                  [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-3
+                  [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-3
+                  [&_li]:mb-1
+                  [&_strong]:font-semibold [&_strong]:text-gray-900
+                "
+                dangerouslySetInnerHTML={{ __html: record.content }}
+              />
+            ) : (
+              <p className="text-base text-gray-700 leading-relaxed whitespace-pre-wrap">
+                {record.content}
+              </p>
+            )}
           </div>
         </div>
       ))}

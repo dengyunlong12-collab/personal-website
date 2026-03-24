@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { DailyThought } from '../../types'
+import RichTextEditor from '../shared/RichTextEditor'
 
 interface Props {
   onSubmit: (record: Omit<DailyThought, 'id' | 'created_at'>) => Promise<void>
@@ -19,7 +20,7 @@ export default function ThoughtForm({ onSubmit, initialData, onCancel }: Props) 
     try {
       await onSubmit({
         date,
-        content: content.trim(),
+        content,
       })
       if (!initialData) {
         setContent('')
@@ -32,7 +33,7 @@ export default function ThoughtForm({ onSubmit, initialData, onCancel }: Props) 
   return (
     <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-gray-200/60 p-6 mb-8 animate-fade-in">
       <h3 className="text-lg font-semibold text-gray-900 mb-5">
-        {initialData ? '编辑随想' : '新增每日随想'}
+        {initialData ? '编辑想法' : '新增想法'}
       </h3>
       <div className="space-y-4 mb-4">
         <div>
@@ -47,13 +48,10 @@ export default function ThoughtForm({ onSubmit, initialData, onCancel }: Props) 
         </div>
         <div>
           <label className="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wide">今天的想法？</label>
-          <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="在这里写下你的想法..."
-            rows={4}
-            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-300 transition-all placeholder:text-gray-400 resize-none"
-            required
+          <RichTextEditor
+            content={content}
+            onChange={setContent}
+            placeholder="在这里写下你的想法，支持插入图片..."
           />
         </div>
       </div>
@@ -72,7 +70,7 @@ export default function ThoughtForm({ onSubmit, initialData, onCancel }: Props) 
           disabled={loading}
           className="px-6 py-2.5 text-sm font-medium text-white bg-gray-900 rounded-full hover:bg-gray-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {loading ? '保存中...' : initialData ? '更新' : '添加随想'}
+          {loading ? '保存中...' : initialData ? '更新' : '发布想法'}
         </button>
       </div>
     </form>

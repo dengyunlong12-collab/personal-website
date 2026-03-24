@@ -23,4 +23,12 @@ export interface DailyThought {
   created_at?: string
 }
 
-export type RecordType = 'fitness' | 'dance' | 'thoughts'
+export interface LifePost {
+  id?: string
+  date: string
+  title: string
+  content: string  // HTML content from rich text editor
+  created_at?: string
+}
+
+export type RecordType = 'about' | 'life' | 'thoughts' | 'projects'

@@ -1,28 +1,28 @@
 import { useState, useEffect, useCallback } from 'react'
-import type { RecordType, FitnessRecord, DanceRecord, DailyThought } from '../types'
-import TabNav from './shared/TabNav'
-import FitnessCards from './visitor/FitnessCards'
-import DanceCards from './visitor/DanceCards'
+import type { RecordType, LifePost, DailyThought } from '../types'
+import AboutPage from './visitor/AboutPage'
+import LifeCards from './visitor/LifeCards'
 import ThoughtCards from './visitor/ThoughtCards'
+import ProjectsPage from './visitor/ProjectsPage'
 import * as api from '../lib/api'
 
-export default function VisitorPage() {
-  const [activeTab, setActiveTab] = useState<RecordType>('fitness')
-  const [fitnessRecords, setFitnessRecords] = useState<FitnessRecord[]>([])
-  const [danceRecords, setDanceRecords] = useState<DanceRecord[]>([])
+interface Props {
+  activeTab: RecordType
+}
+
+export default function VisitorPage({ activeTab }: Props) {
+  const [lifePosts, setLifePosts] = useState<LifePost[]>([])
   const [thoughts, setThoughts] = useState<DailyThought[]>([])
   const [loading, setLoading] = useState(true)
 
   const loadData = useCallback(async () => {
     setLoading(true)
     try {
-      const [fitness, dance, dailyThoughts] = await Promise.all([
-        api.getFitnessRecords(),
-        api.getDanceRecords(),
+      const [life, dailyThoughts] = await Promise.all([
+        api.getLifePosts().catch(() => [] as LifePost[]),
         api.getDailyThoughts(),
       ])
-      setFitnessRecords(fitness)
-      setDanceRecords(dance)
+      setLifePosts(life)
       setThoughts(dailyThoughts)
     } catch (err) {
       console.error('Failed to load data:', err)
@@ -46,28 +46,11 @@ export default function VisitorPage() {
 
   return (
     <div>
-      {/* Hero section */}
-      <div className="text-center pt-20 pb-16 animate-fade-in-up">
-        <div className="mb-6">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 text-gray-500 text-xs font-medium mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
-            生活，学习，成长
-          </div>
-        </div>
-        <h1 className="text-6xl sm:text-7xl font-bold tracking-tight text-gray-900 mb-6">
-          壹龙的生活
-        </h1>
-        <p className="text-xl text-gray-500 max-w-lg mx-auto leading-relaxed">
-          记录我的健身、舞蹈和日常思考
-        </p>
-      </div>
-
-      <TabNav activeTab={activeTab} onTabChange={setActiveTab} />
-
-      <div className="max-w-4xl mx-auto px-6 pb-20">
-        {activeTab === 'fitness' && <FitnessCards records={fitnessRecords} />}
-        {activeTab === 'dance' && <DanceCards records={danceRecords} />}
+      <div className="max-w-4xl mx-auto px-6 pb-20 pt-8">
+        {activeTab === 'about' && <AboutPage />}
+        {activeTab === 'life' && <LifeCards records={lifePosts} />}
         {activeTab === 'thoughts' && <ThoughtCards records={thoughts} />}
+        {activeTab === 'projects' && <ProjectsPage />}
       </div>
 
       {/* Footer */}
